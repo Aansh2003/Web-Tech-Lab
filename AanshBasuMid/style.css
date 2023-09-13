@@ -1,0 +1,94 @@
+.light {
+    width: 0; 
+    height: 0; 
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 30px solid black;
+    transform: rotate(180deg);
+    position: absolute;
+    left: 400px;
+    top: 300px;
+    box-shadow: 0 -80px 50px 30px yellow;
+}
+
+.pocket{
+    position: absolute;
+    left:220px;
+    top: 365px;
+    border: solid 1px black;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+table{
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    transform: rotate(45deg);
+    /* border-collapse: collapse; */
+}
+
+th, td {
+    padding: 0;
+}
+
+.board{
+    position: absolute;
+    left:235px;
+    top:380px;
+    border: solid black 1px;
+    height: 400px;
+    width: 400px;
+    z-index: 9;
+}
+
+.striker{
+    position: relative;
+    height: 25px;
+    width: 25px;
+    border: 1px solid red;
+    background-color: red;
+    border-radius: 12.5px;
+    top:370px;
+    left: 5px;
+    animation-name: move_1;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes move_1 {
+    40% {left:187.5px;top:0px}
+    80% {left:357.5px;top:370px}
+    100% {left:357.5px;top: 340px}
+}
+
+.coin{
+    position: relative;
+    height: 25px;
+    width: 25px;
+    border: 1px solid black;
+    background-color: black;
+    border-radius: 12.5px;
+    top: 340px;
+    left: 365px;
+    animation-name: move_2;
+    animation-duration: 2s;
+    animation-delay: 1.6s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;   
+}
+
+@keyframes move_2 {
+    10% {top:350px;left:370px}
+    50% {top:-40px;left:-12.5px;}
+    100% {top:-40px;left:-12.5px;opacity: 0;}
+}
