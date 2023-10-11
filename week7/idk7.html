@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Coordinates on Canvas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        #canvas-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 800px;
+            margin: 0 auto;
+            position: relative; /* Positioning context for coordinates element */
+        }
+
+        canvas {
+            border: 1px solid #000;
+        }
+
+        #coordinates {
+            font-size: 18px;
+            position: absolute; /* Position the coordinates relative to the container */
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <h1>Paint(Kind of)</h1>
+        <h5>left click: paint</h3>
+        <h5>middle click: erase</h3>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <div id="color-container" style="text-align: center;padding: 20px;">
+            <canvas id="black"width="25" height="25" style="background-color: black;"></canvas>
+            <canvas id="white"width="25" height="25" style="background-color: white;"></canvas>
+            <canvas id="red"width="25" height="25" style="background-color: red;"></canvas>
+            <canvas id="yellow"width="25" height="25" style="background-color: yellow;"></canvas>
+            <canvas id="green"width="25" height="25" style="background-color: green;"></canvas>
+            <canvas id="blue"width="25" height="25" style="background-color: blue;"></canvas>
+            <canvas id="orange"width="25" height="25" style="background-color: orange;"></canvas>
+            <canvas id="purple"width="25" height="25" style="background-color: purple;"></canvas>
+            <canvas id="brown"width="25" height="25" style="background-color: brown;"></canvas>
+            <canvas id="pink"width="25" height="25" style="background-color: pink;"></canvas>
+            <canvas id="cyan"width="25" height="25" style="background-color: cyan;"></canvas>
+        </div>
+        <button onclick="customColor()">Enter custom hex code</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+
+        const canvas_b = document.getElementById("black");
+        const canvas_w = document.getElementById("white");
+        const canvas_r = document.getElementById("red");
+        const canvas_y = document.getElementById("yellow");
+        const canvas_g = document.getElementById("green");
+        const canvas_bl = document.getElementById("blue");
+        const canvas_o = document.getElementById("orange");
+        const canvas_p = document.getElementById("purple");
+        const canvas_br = document.getElementById("brown");
+        const canvas_pi = document.getElementById("pink");
+        const canvas_c = document.getElementById("cyan");
+
+        const ctx = canvas.getContext("2d");
+        const coordinatesText = document.getElementById("coordinates");
+        let x = 0,y = 0;
+        let draw = false;
+        let color = "black"
+
+        let controller = canvas_b;
+        controller.style.boxShadow = "0px 5px lightblue"
+
+        function customColor(){
+            let hex = prompt("Enter your custom hex code:")
+            var check = 6;
+            if (hex.startsWith('#')){
+                check = 7;
+            }
+            if(hex.length != check){
+                alert("Incorrect hex code!");
+                return;
+            }
+            if(check === 6){
+                hex = "#"+hex;
+            }
+            ctx.fillStyle = hex;
+            controller.style.boxShadow = "0px 5px white";
+        }
+
+        canvas.addEventListener("mousemove", (event) => {
+            const rect = canvas.getBoundingClientRect();
+            x = event.clientX - rect.left;
+            y = event.clientY - rect.top;
+            if (draw === true)
+            {
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        });
+
+        canvas.addEventListener("mousedown", (event) => {
+            if (event.button === 0)
+            {
+                draw = true
+            }
+            else if( event.button === 1)
+            {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+
+        canvas.addEventListener("mouseup", (event) => {
+            draw = false;
+        });
+
+        canvas_b.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'black';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_b;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_w.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'white';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_w;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_r.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'red';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_r;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_y.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'yellow';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_y;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_g.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'green';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_g;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_bl.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'blue';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_bl;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_o.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'orange';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_o;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_p.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'purple';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_p;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_br.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'brown';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_br;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_pi.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'pink';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_pi;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+
+        canvas_c.addEventListener("mousedown", (event) => {
+            ctx.fillStyle = 'cyan';
+            controller.style.boxShadow = "0px 5px white";
+            controller = canvas_c;
+            controller.style.boxShadow = "0px 5px lightblue";
+        });
+    </script>
+</body>
+</html>

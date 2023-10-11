@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Coordinates on Canvas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        #canvas-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 800px;
+            margin: 0 auto;
+            position: relative; /* Positioning context for coordinates element */
+        }
+
+        canvas {
+            border: 1px solid #000;
+        }
+
+        #coordinates {
+            font-size: 18px;
+            position: absolute; /* Position the coordinates relative to the container */
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <h1>Mouse Coordinates on Canvas</h1>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <p id="coordinates"></p>
+        <p id="click"></p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const coordinatesText = document.getElementById("coordinates");
+        const click = document.getElementById("click");
+        let x = 0,y = 0;
+
+        canvas.addEventListener("mousemove", (event) => {
+            const rect = canvas.getBoundingClientRect();
+            x = event.clientX - rect.left;
+            y = event.clientY - rect.top;
+
+
+            coordinatesText.style.left = `${x}px`;
+            coordinatesText.style.top = `${y+100}px`;
+
+            coordinatesText.textContent = `Mouse Coordinates: (${x}, ${y})`;
+
+            // Clear canvas and draw a circle at the mouse coordinates
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+        });
+
+        canvas.addEventListener("mousedown", (event) => {
+            click.textContent = "Click!";
+            click.style.left = `${x}px`;
+            click.style.top = `${y+120}px`;
+        });
+
+        canvas.addEventListener("mouseup", (event) => {
+            click.textContent = "";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        .header{
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <p class="header">Guess a number between 1 and 100:</p>
+        <input type="number" id="guessInput" min="1" max="100">
+        <input type="submit" value="Submit Guess" id="guessButton">
+        <p>Attempts left: <span id="attempts">5</span></p>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+        let attempts = 5;
+
+        document.getElementById("guessButton").addEventListener("click", function () {
+            const guess = parseInt(document.getElementById("guessInput").value);
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                setMessage("Please enter a valid number between 1 and 100.");
+                return;
+            }
+
+            attempts--;
+
+            if (guess === randomNumber) {
+                setMessage(`Congratulations! You guessed the correct number: ${randomNumber}`);
+                disableInput();
+            } else if (attempts === 0) {
+                setMessage(`Game over! The correct number was ${randomNumber}`);
+                disableInput();
+            } else {
+                if (guess < randomNumber){
+                    alert(`Your guess was lesser than the number!`)
+                }
+                else{
+                    alert(`Your guess was larger than the number!`)
+                }
+                setMessage(`Incorrect guess.`);
+                setAttempt(attempts);
+            }
+        });
+
+        function setMessage(message) {
+            document.getElementById("message").textContent = message;
+        }
+
+        function setAttempt(attempts){
+            document.getElementById("attempts").textContent = attempts;
+        }
+
+        function disableInput() {
+            document.getElementById("guessInput").disabled = true;
+            document.getElementById("guessButton").disabled = true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Boxes</title>
+</head>
+<body>
+    <h1 style="text-align: center;">JavaScript Boxes</h1>
+    <p style="text-align: center;">Click the buttons below to open different types of boxes:</p>
+
+    <button onclick="showAlertBox()">Alert Box</button>
+    <button onclick="showPromptBox()">Prompt Box</button>
+    <button onclick="showConfirmBox()">Confirm Box</button>
+
+    <script>
+        function showAlertBox() {
+            alert("This is an alert box!");
+        }
+
+        function showPromptBox() {
+            var name = prompt("This is a prompt box, enter anything:");
+        }
+
+        function showConfirmBox() {
+            var result = confirm("This is a confirmbox");
+        }
+    </script>
+</body>
+</html>
